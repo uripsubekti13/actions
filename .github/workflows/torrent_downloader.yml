@@ -1,0 +1,34 @@
+name: Torrent Download
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Torrent file URL'
+        required: true
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+ 
+        - name: Install Torrent Client
+          run: sudo apt install transmission-cli
+        
+        - name: Write .env File
+          run: |
+              echo '${{ secrets.DOTENV }}' >> .env
+        
+        - name: Install Dependencies
+          run: npm install
+
+        - name: Create Dowload Folder
+          run: mkdir DL 
+          
+        - name: Dowload File
+          run: node scripts/torrent-downloader.js ${{ github.event.inputs.url }} DL
+      
+        - name: LS
+          run: cd DL && ls -la
+
+        - name: Upload to Drive
+          run: node scripts/upload-dir-to-drive DL

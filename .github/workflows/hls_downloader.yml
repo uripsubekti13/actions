@@ -1,0 +1,35 @@
+name: VIU Downloader
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'viu id'
+        required: true
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+ 
+        
+        - name: Write .env File
+          run: |
+              echo '${{ secrets.DOTENV }}' >> .env
+              sudo npm i -g node-hls-downloader
+
+        - name: Install modules
+          run: |
+              yarn install
+              sudo apt update && sudo apt install ffmpeg exiftool handbrake-cli
+              
+        - name: Create Dowload Folder
+          run: mkdir DL 
+          
+        - name: Dowload File
+          run: node scripts/viu-downloader ${{ github.event.inputs.id }}
+      
+        - name: LS
+          run: cd DL && ls -la
+
+        - name: Upload to Drive
+          run: node scripts/upload-dir-to-drive DL

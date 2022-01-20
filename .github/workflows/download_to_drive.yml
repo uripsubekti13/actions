@@ -1,0 +1,26 @@
+name: Download to drive
+on:
+  # repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL file'
+        required: true
+      filename:
+        description: 'Filename'
+        required: false
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Write .env File
+        run: |
+            echo '${{ secrets.DOTENV }}' >> .env
+      
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Dowload File
+        run: node scripts/download-to-drive.js ${{ github.event.inputs.url }} ${{ github.event.inputs.filename }}

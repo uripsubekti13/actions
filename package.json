@@ -1,0 +1,24 @@
+{
+    "name": "github-actions",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "Urip Subekti",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.20.0",
+        "dotenv": "^10.0.0",
+        "googleapis": "^82.0.0",
+        "mime-types": "^2.1.31",
+        "moment": "2.29.1",
+        "m3u8_multi_downloader": "1.1.5",
+        "node-m3u8-to-mp4": "3.0.0",
+        "node-torrent": "0.2.2",
+        "tree-kill": "1.2.2",
+        "viu-api-wrapper": "^1.0.5"
+    }
+}

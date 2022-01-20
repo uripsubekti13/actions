@@ -1,0 +1,36 @@
+name: DesignCode
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  repository_dispatch:
+  workflow_dispatch:
+jobs:
+  
+  sync_data:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Write .env File
+        run: |
+            echo '${{ secrets.DOTENV }}' >> .env
+            ls -la
+            cat .env
+        
+      - name: Create Temporary Directory
+        run: mkdir videos
+        
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Doing Magic Here...
+        run: node scripts/design-code.js
+  
+      - name: LS
+        run: ls -la videos/
+
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: ${{ github.event.inputs.name }}
+      #     path: videos/
