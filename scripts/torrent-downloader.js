@@ -14,7 +14,7 @@ const exeAsync = async (cmd) => {
 
         p.stdout.on('data', (data) => {
             console.log(data);
-            if (data.includes('Progress: 100.0%')) {
+            if (data.includes('Progress: 100.0%') || data.includes('Seeding') ) {
                 console.log('FINISH', {pid: p.pid});
                 kill(p.pid);
             }
