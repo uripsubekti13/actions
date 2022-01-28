@@ -1,6 +1,7 @@
 const { writeFileSync } = require('fs');
 const { exec } = require("child_process");
 const kill = require('tree-kill');
+let lastProcess = null;
 
 const exeAsync = async (cmd) => {
     return new Promise((resolve, reject) => {
@@ -13,7 +14,8 @@ const exeAsync = async (cmd) => {
         });
 
         p.stdout.on('data', (data) => {
-            console.log(data);
+            if (data !== lastProcess) console.log(data);
+            lastProcess = data;
             if (data.includes('Progress: 100.0%') || data.includes('Seeding') ) {
                 console.log('FINISH', {pid: p.pid});
                 kill(p.pid);
