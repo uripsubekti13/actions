@@ -1,7 +1,6 @@
 const { writeFileSync } = require('fs');
 const { exec } = require("child_process");
 const kill = require('tree-kill');
-let lastProcess = null;
 
 const exeAsync = async (cmd) => {
     return new Promise((resolve, reject) => {
@@ -12,7 +11,8 @@ const exeAsync = async (cmd) => {
                 resolve(stdout)
             }
         });
-
+        
+        let lastProcess = null;
         p.stdout.on('data', (data) => {
             if (data !== lastProcess) console.log(data);
             lastProcess = data;
