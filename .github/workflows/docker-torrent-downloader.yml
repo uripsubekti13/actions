@@ -1,0 +1,25 @@
+name: Docker Torrent Download
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Torrent file URL'
+        required: true
+jobs:
+  download:
+    container: subekti13/torrent-downloader
+    steps:
+       
+        - name: Write .env File
+          run: |
+              echo '${{ secrets.DOTENV }}' >> .env
+        
+        - name: Create Dowload Folder
+          run: mkdir DL 
+          
+        - name: Dowload File
+          run: node /app/torrent-downloader.js ${{ github.event.inputs.url }} DL
+      
+        - name: LS
+          run: cd DL && ls -la
+
