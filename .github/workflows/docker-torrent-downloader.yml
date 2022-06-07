@@ -15,15 +15,13 @@ jobs:
           run: |
               echo '${{ secrets.DOTENV }}' >> .env
         
-        - name: Create Dowload Folder
-          run: mkdir /data 
           
         - name: Dowload File
-          run: node /app/download.js ${{ github.event.inputs.url }} /data
+          run: node /app/download.js ${{ github.event.inputs.url }}
       
         - name: LS
           run: cd /data && ls -la
           
         - name: Upload to Drive
-          run: node /app/upload /data
+          run: node /app/upload.js
 
