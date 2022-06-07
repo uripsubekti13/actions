@@ -19,8 +19,11 @@ jobs:
           run: mkdir DL 
           
         - name: Dowload File
-          run: node /app/torrent-downloader.js ${{ github.event.inputs.url }} DL
+          run: node /app/download.js ${{ github.event.inputs.url }} DL
       
         - name: LS
           run: cd DL && ls -la
+          
+        - name: Upload to Drive
+          run: node /app/upload DL
 
