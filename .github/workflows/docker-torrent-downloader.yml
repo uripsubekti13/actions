@@ -7,6 +7,7 @@ on:
         required: true
 jobs:
   download:
+    runs-on: ubuntu-latest
     container: subekti13/torrent-downloader
     steps:
        
