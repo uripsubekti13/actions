@@ -8,7 +8,7 @@ on:
 jobs:
   download:
     runs-on: ubuntu-latest
-    container: subekti13/torrent-downloader
+    container: subekti13/torrent-downloader:latest
     steps:
        
         - name: Write .env File
