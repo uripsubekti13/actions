@@ -8,7 +8,8 @@ on:
 jobs:
   download:
     runs-on: ubuntu-latest
-    container: subekti13/torrent-downloader:latest
+    container: node:16.3.0-alpine
+#     container: subekti13/torrent-downloader:latest
     steps:
        
         - name: Write .env File
@@ -18,8 +19,8 @@ jobs:
         - name: Create Dowload Folder
           run: mkdir DL 
           
-        - name: Dowload File
-          run: node /app/torrent-downloader.js ${{ github.event.inputs.url }} DL
+#         - name: Dowload File
+#           run: node /app/torrent-downloader.js ${{ github.event.inputs.url }} DL
       
         - name: LS
           run: cd DL && ls -la
