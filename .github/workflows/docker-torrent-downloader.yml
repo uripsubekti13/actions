@@ -10,10 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     container: subekti13/torrent-downloader:latest
     steps:
+    
+        - uses: subekti404dev/github-action-vault-secret@v1
+          id: vault
+          with:
+            base-url: "${{ secrets.VAULT_BASE_URL }}"
+            path: "${{ secrets.VAULT_PATH }}"
+            token: "${{ secrets.VAULT_TOKEN }}"
+            key: "DOTENV"
        
         - name: Write .env File
           run: |
-              echo '${{ secrets.DOTENV }}' >> .env
+              echo '${{ steps.vault.outputs.data }}' >> .env
         
           
         - name: Dowload File
