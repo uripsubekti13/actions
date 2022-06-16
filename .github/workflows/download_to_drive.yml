@@ -16,13 +16,12 @@ jobs:
       - uses: actions/checkout@v2
       
       - uses: subekti404dev/github-action-vault-secret@v1
-        id: vault
         with:
-            base-url: "${{ secrets.VAULT_BASE_URL }}"
-            path: "${{ secrets.VAULT_PATH }}"
-            token: "${{ secrets.VAULT_TOKEN }}"
-            key: "DOTENV"
-            to-file: ".env"
+          base-url: "${{ secrets.VAULT_BASE_URL }}"
+          token: "${{ secrets.VAULT_TOKEN }}"
+          path: "uripsubekti13/actions"
+          key: "DOTENV"
+          to-file: ".env"
       
       - name: Install Dependencies
         run: npm install
