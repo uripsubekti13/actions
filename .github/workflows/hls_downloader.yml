@@ -11,11 +11,17 @@ jobs:
     steps:
         - uses: actions/checkout@v2
  
+        - uses: subekti404dev/github-action-vault-secret@v1
+          id: vault
+          with:
+            base-url: "${{ secrets.VAULT_BASE_URL }}"
+            path: "${{ secrets.VAULT_PATH }}"
+            token: "${{ secrets.VAULT_TOKEN }}"
+            key: "DOTENV"
+            to-file: ".env"
         
         - name: Write .env File
-          run: |
-              echo '${{ secrets.DOTENV }}' >> .env
-              sudo npm i -g node-hls-downloader
+          run: sudo npm i -g node-hls-downloader
 
         - name: Install modules
           run: |
