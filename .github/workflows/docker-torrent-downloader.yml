@@ -18,11 +18,7 @@ jobs:
             path: "${{ secrets.VAULT_PATH }}"
             token: "${{ secrets.VAULT_TOKEN }}"
             key: "DOTENV"
-       
-        - name: Write .env File
-          run: |
-              echo '${{ steps.vault.outputs.data }}' >> .env
-        
+            to-file: ".env"
           
         - name: Dowload File
           run: node /app/download.js ${{ github.event.inputs.url }}
