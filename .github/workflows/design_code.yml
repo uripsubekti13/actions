@@ -12,11 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Write .env File
-        run: |
-            echo '${{ secrets.DOTENV }}' >> .env
-            ls -la
-            cat .env
+      - uses: subekti404dev/github-action-vault-secret@v1
+        id: vault
+        with:
+          base-url: "${{ secrets.VAULT_BASE_URL }}"
+          path: "${{ secrets.VAULT_PATH }}"
+          token: "${{ secrets.VAULT_TOKEN }}"
+          key: "DOTENV"
+          to-file: ".env"
         
       - name: Create Temporary Directory
         run: mkdir videos
